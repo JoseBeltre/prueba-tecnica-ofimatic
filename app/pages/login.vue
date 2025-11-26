@@ -3,6 +3,7 @@ import { IconEye, IconEyeOff } from '@tabler/icons-vue'
 
 definePageMeta({
   layout: 'auth',
+  middleware: ['guest']
 })
 useSeoMeta({
   title: 'Iniciar sesión - Ofimatic'

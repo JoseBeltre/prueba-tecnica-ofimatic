@@ -1,4 +1,4 @@
-import { userStore } from '~/stores/userStore'
+import { useUserStore } from '~/stores/useUserStore'
 
 export function useAuth () {
   const loading = ref()
@@ -41,7 +41,7 @@ export function useAuth () {
         accessToken,
         refreshToken } = data
       
-      const store = userStore()
+      const store = useUserStore()
       store.setUser({
         id,
         username,
