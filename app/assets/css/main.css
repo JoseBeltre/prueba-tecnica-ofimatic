@@ -1,3 +1,18 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-poppins: 'Poppins', system-ui, sans-serif;
+  --font-sans: 'DM Sans',  system-ui, sans-serif;
+
+  --color-light-blue: #9bb7ff,
+}
+
+@layer components {
+  .floating-label {
+    @apply absolute left-4 top-1/2 -translate-y-1/2 text-black/40 text-sm bg-white px-2 transition-all peer-focus:top-0 peer-focus:text-[#6791fd] peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-[#6791fd];
+  }
+  .floating-input {
+    @apply w-full rounded-lg outline-2 h-12 outline-black/18 ps-4 focus:outline-[#9bb7ff] [:not(:placeholder-shown)]:outline-[#9bb7ff];
+  }
+}
