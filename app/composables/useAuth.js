@@ -1,3 +1,5 @@
+import { userStore } from '~/stores/userStore'
+
 export function useAuth () {
   const loading = ref()
   const user = ref()
@@ -5,7 +7,9 @@ export function useAuth () {
 
 
   const login = async ({ username, password }) => {
+    // Estado de carga en proceso
     loading.value = true
+    
     try {
       const response = await fetch('https://dummyjson.com/auth/login', {
         method: 'POST',
@@ -14,20 +18,53 @@ export function useAuth () {
           username,
           password,
           expiresInMins: 5
-        })
+        }),
       })
+
+      // Si no responde con status OK
       if (response.status !== 200) {
         const err = await response.json()
         error.value = err.message
         return
       }
+
       const data = await response.json()
       user.value = data
-      console.log(user)
+      console.log('este es el user ref:', user.value)
+      const { 
+        id,
+        email,
+        firstName,
+        lastName,
+        gender,
+        image,
+        accessToken,
+        refreshToken } = data
+      
+      const store = userStore()
+      store.setUser({
+        id,
+        username,
+        email,
+        firstName,
+        lastName,
+        gender,
+        image
+      })
+      store.setTokens({
+        accessToken,
+        refreshToken
+      })
+
+      console.log('store user:', store.user)
+      console.log('store tokens:', store.tokens)
     } catch (error) {
         console.log('Error autenticando: ', error)
+    } finally {
+      // Carga se detuvo
+      loading.value = false
     }
-    loading.value = false
+
   }
 
   return { user, loading, error, login }
