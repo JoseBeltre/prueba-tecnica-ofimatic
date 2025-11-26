@@ -25,12 +25,12 @@ export function useAuth () {
       if (response.status !== 200) {
         const err = await response.json()
         error.value = err.message
-        return
+        return false
       }
 
       const data = await response.json()
       user.value = data
-      console.log('este es el user ref:', user.value)
+
       const { 
         id,
         email,
@@ -56,8 +56,7 @@ export function useAuth () {
         refreshToken
       })
 
-      console.log('store user:', store.user)
-      console.log('store tokens:', store.tokens)
+      return true
     } catch (error) {
         console.log('Error autenticando: ', error)
     } finally {

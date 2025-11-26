@@ -1,4 +1,6 @@
 <script setup>
+import { IconEye, IconEyeOff } from '@tabler/icons-vue'
+
 definePageMeta({
   layout: 'auth',
 })
@@ -12,6 +14,7 @@ const formData = ref({
 })
 
 const { error, loading, login } = useAuth()
+const showPassword = ref(false)
 
 watch(formData.value, () => {
   if(error.value){
@@ -19,10 +22,14 @@ watch(formData.value, () => {
   }
 })
 
-const handleLogin = () => {
+const handleLogin = async () => {
   const { username, password } = formData.value
 
-  login({ username, password })
+  const logged = await login({ username, password })
+
+  if (logged){
+    navigateTo('/')
+  }
 }
 
 
@@ -38,10 +45,15 @@ const handleLogin = () => {
         <label class="floating-label" for="username">Nombre de usuario</label>
       </div>
       <div class="relative">
-        <input id="password" v-model="formData.password" class="floating-input peer" placeholder=" "  name="password" type="password" required>
+        <input id="password" v-model="formData.password" class="floating-input peer" placeholder=" "  name="password" :type="`${showPassword ? 'text' : 'password'}`" required>
         <label class="floating-label" for="password">Contraseña</label>
+        <label class="absolute top-1/2 -translate-y-1/2 right-3 text-black/40 hover:text-[#6791fd] cursor-pointer transition-colors peer-focus:text-[#6791fd]" for="show-password">
+          <IconEye v-if="showPassword" stroke="1.5"  />
+          <IconEyeOff v-else stroke="1.5" />
+        </label>
+        <input id="show-password" v-model="showPassword" class="hidden" type="checkbox">
       </div>
-      <p v-if="error" class="text-sta rounded-xl font-medium text-sm text-red-600">
+      <p v-if="error" class="rounded-xl font-medium text-sm text-red-600">
         {{ error }}
       </p>
       <button class="text-white bg-[#8bacff] h-12 font-bold rounded-xl uppercase tracking-wide cursor-pointer hover:bg-[#6791fd] hover:tracking-widest transition-all flex items-center justify-center" type="submit">
