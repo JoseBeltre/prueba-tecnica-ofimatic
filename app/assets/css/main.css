@@ -15,4 +15,8 @@
   .floating-input {
     @apply w-full rounded-lg outline-2 h-12 outline-black/18 ps-4 focus:outline-[#9bb7ff] [:not(:placeholder-shown)]:outline-[#9bb7ff];
   }
+
+  body {
+    @apply font-poppins;
+  }
 }
