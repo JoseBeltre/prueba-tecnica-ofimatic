@@ -16,6 +16,22 @@
     @apply w-full rounded-lg outline-2 h-12 outline-black/18 ps-4 focus:outline-[#9bb7ff] [:not(:placeholder-shown)]:outline-[#9bb7ff];
   }
 
+  .filter{
+    @apply py-1 px-2 sm:px-4 border sm:border-2 rounded-md sm:rounded-xl focus:outline-0 cursor-pointer;
+  }
+
+  .filter-wrapper{
+    @apply flex max-sm:flex-1 items-center gap-3 max-sm:text-sm
+  }
+
+  .filter-wrapper label{
+    @apply max-sm:w-30 text-nowrap;
+  }
+
+  .pagination-wrapper button {
+    @apply p-1 rounded-xl border cursor-pointer;
+  }
+
   body {
     @apply font-poppins;
   }

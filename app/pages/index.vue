@@ -1,5 +1,8 @@
 <script setup>
-import { IconArrowUp, IconChevronRight } from '@tabler/icons-vue';
+import { IconArrowUp, IconChevronRight } from '@tabler/icons-vue'
+import { useProducts } from '@/composables/useProducts';
+import { usePosts } from '@/composables/usePosts';
+import { useUsers } from '@/composables/useUsers';
 import BagImg from '@/assets/imgs/dashboard/bag.png'
 import UserImg from '@/assets/imgs/dashboard/user.png'
 import PencilImg from '@/assets/imgs/dashboard/pencil.png'
