@@ -7,7 +7,8 @@ definePageMeta({
   middleware: ['auth']
 })
 const user = useUserStore().user
-const { products, topRated } = useProducts()
+const { products, topRated, getCategories } = useProducts()
+const categories = await getCategories()
 
 </script>
 <template>
@@ -34,10 +35,8 @@ const { products, topRated } = useProducts()
       <div class="filter-wrapper">
         <label>Category: </label>
         <span class="filter">
-          <select id="category-select" class="cursor-pointer focus:outline-none" name="category-select">
-            <option value="vala">Zapatos</option>
-            <option value="vala1">vala1</option>
-            <option value="vala2">vala2</option>
+          <select id="category-select" class="cursor-pointer focus:outline-none capitalize" name="category-select">
+            <option v-for="category in categories" :key="category" value="category">{{ category }}</option>
           </select>
         </span>
       </div>
@@ -49,9 +48,11 @@ const { products, topRated } = useProducts()
         <label>Items per page:</label>
         <span class="filter">
           <select id="items-select" class="cursor-pointer focus:outline-none" name="items-select">
-            <option value="vala">Zapatos</option>
-            <option value="vala1">vala1</option>
-            <option value="vala2">vala2</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="35">35</option>
+            <option value="50">50</option>
           </select>
         </span>
       </div>

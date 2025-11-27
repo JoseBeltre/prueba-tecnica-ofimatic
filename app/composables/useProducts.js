@@ -13,12 +13,17 @@ export function useProducts() {
     return await useFetch(`https://dummyjson.com/products/${id}`)
   }
 
+  const getCategories = async () => {
+    return await $fetch('https://dummyjson.com/products/category-list')
+  }
+
   return { 
     pending,
     products,
     total,
     topRated,
     error,
-    getById 
+    getById,
+    getCategories 
   }
 }
