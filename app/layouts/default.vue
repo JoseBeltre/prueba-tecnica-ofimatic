@@ -1,3 +1,6 @@
+<script setup>
+  const user = useUserStore().user
+</script>
 <template>
   <div class="min-h-dvh bg-linear-to-br from-[#D0DDFF] to-[#8EADFC] p-6 pb-0">
     <div class="bg-white min-h-dvh px-6 rounded-t-2xl">
@@ -12,10 +15,10 @@
           <li><NuxtLink to="/blog">Blog</NuxtLink></li>
         </ul>
         </div>
-        <div class="flex items-center gap-3 font-medium">
-          <h3>Jose Beltre Cordero</h3>
-          <div class="size-10 bg-gray-400 rounded-full overflow-hidden">
-            <img src="" alt="">
+        <div class="flex items-center gap-3 font-medium text-end leading-4">
+          <h3>{{ user.firstName + ' ' + user.lastName }}</h3>
+          <div class="w-10 bg-gray-200 rounded-full overflow-hidden aspect-square ">
+            <img class="size-full object-cover aspect-square" :src="user.image" :alt="`Photo of ${user.username}`">
           </div>
         </div>
       </header>
