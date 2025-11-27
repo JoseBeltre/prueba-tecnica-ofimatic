@@ -9,9 +9,7 @@ definePageMeta({
 })
 const user = useUserStore().user
 
-const { getAll } = useProducts()
-const { data: productsData } = await getAll()
-const totalProducts = computed(() => productsData.value?.total || 0)
+const { total } = useProducts()
 
 const { getAll: getAllPosts } = usePosts()
 const { data: postsData } = await getAllPosts()
@@ -41,7 +39,7 @@ const totalUsers = computed(() => usersData.value?.total || 0)
         </div>
         <div class="text-white z-10 mt-4 group-hover:scale-110 transition-transform duration-300">
           <h2 class="font-extrabold text-7xl md:text-9xl drop-shadow-2xl">
-            {{ totalProducts }}
+            {{ total }}
           </h2>
           <h3 class="leading-2 md:leading-0 font-bold text-2xl drop-shadow-2xl">Productos</h3>
         </div>
