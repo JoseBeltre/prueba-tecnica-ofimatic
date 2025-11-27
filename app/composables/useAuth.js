@@ -9,7 +9,7 @@ export function useAuth () {
   const login = async ({ username, password }) => {
     // Estado de carga en proceso
     loading.value = true
-    
+    // TODO: Use useFetch API
     try {
       const response = await fetch('https://dummyjson.com/auth/login', {
         method: 'POST',

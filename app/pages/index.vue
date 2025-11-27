@@ -7,8 +7,19 @@ import PencilImg from '@/assets/imgs/dashboard/pencil.png'
 definePageMeta({
   middleware: ['auth']
 })
-
 const user = useUserStore().user
+
+const { getAll } = useProducts()
+const { data: productsData } = await getAll()
+const totalProducts = computed(() => productsData.value?.total || 0)
+
+const { getAll: getAllPosts } = usePosts()
+const { data: postsData } = await getAllPosts()
+const totalPosts = computed(() => postsData.value?.total || 0)
+
+const { getAll: getAllUsers } = useUsers()
+const { data: usersData } = await getAllUsers()
+const totalUsers = computed(() => usersData.value?.total || 0)
 
 </script>
 <template>
@@ -29,7 +40,9 @@ const user = useUserStore().user
           <img class="size-full" :src="BagImg" alt="">
         </div>
         <div class="text-white z-10 mt-4 group-hover:scale-110 transition-transform duration-300">
-          <h2 class="font-extrabold text-7xl md:text-9xl drop-shadow-2xl">231</h2>
+          <h2 class="font-extrabold text-7xl md:text-9xl drop-shadow-2xl">
+            {{ totalProducts }}
+          </h2>
           <h3 class="leading-2 md:leading-0 font-bold text-2xl drop-shadow-2xl">Productos</h3>
         </div>
         <IconArrowUp class="absolute top-4 right-4 rotate-45 text-white" size="36" stroke="1" />
@@ -40,7 +53,9 @@ const user = useUserStore().user
           <img class="size-full" :src="PencilImg" alt="">
         </div>
         <div class="text-white z-10 mt-2 group-hover:scale-110 transition-transform duration-300">
-          <h2 class="font-extrabold text-7xl md:text-9xl drop-shadow-2xl">122</h2>
+          <h2 class="font-extrabold text-7xl md:text-9xl drop-shadow-2xl">
+            {{ totalPosts }}
+          </h2>
           <h3 class="leading-2 md:leading-0 font-bold text-2xl drop-shadow-2xl">Publicaciones</h3>
         </div>
         <IconArrowUp class="absolute top-4 right-4 rotate-45 text-white" size="36" stroke="1" />
@@ -50,14 +65,16 @@ const user = useUserStore().user
         <div class="size-86 absolute -left-22 -bottom-36 md:-bottom-28 md:-left-12 group-hover:scale-120 transition-transform duration-300">
           <img class="size-full" :src="UserImg" alt="">
         </div>
-        <div class="text-white z-10 mt-2 me-8 group-hover:scale-110 transition-transform duration-300">
+        <div class="text-white z-10 me-2 group-hover:scale-110 transition-transform duration-300">
           <h3 class="leading-4 font-bold text-2xl drop-shadow-2xl">Usuarios</h3>
-          <h2 class="font-extrabold text-7xl md:text-9xl drop-shadow-2xl">221</h2>
+          <h2 class="font-extrabold text-7xl md:text-9xl drop-shadow-2xl">
+            {{ totalUsers }}
+          </h2>
           <h3 class="leading-2 md:leading-0 font-bold text-2xl drop-shadow-2xl">Activos</h3>
         </div>
-        <IconArrowUp class="absolute top-4 right-4 rotate-45 text-white" size="36" stroke="1" />
+        <!-- <IconArrowUp class="absolute top-4 right-4 rotate-45 text-white" size="36" stroke="1" /> -->
       </NuxtLink>
     </div>
-    <p class="my-2 ms-2 font-medium text-black/60">Tip: Haz clic en los cuadros que tienen el icono de flecha para acceder más rápido.</p>
+    <p class="my-2 ms-2 font-medium text-black/60">Tip: Haz clic en los cuadros que tienen el icono de flecha para navegar más rápido.</p>
   </div>
 </template>
