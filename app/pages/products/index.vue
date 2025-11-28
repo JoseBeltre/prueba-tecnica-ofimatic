@@ -1,12 +1,14 @@
 <script setup>
 import { IconChevronLeft, IconChevronRight, IconChevronsLeft, IconChevronsRight } from '@tabler/icons-vue';
 import { useProducts } from '@/composables/useProducts';
+import { usePagination } from '@/composables/usePagination';
 import SearchInput from '~/components/search-input.vue';
 
 definePageMeta({
   title: 'Products - Ofimatic',
   middleware: ['auth']
 })
+
 
 const user = useUserStore().user
 const { products, topRated, getCategories, searchProducts, getProductsByCategory } = useProducts()
@@ -15,11 +17,6 @@ const filters = ref({
   search: '',
   category: 'all',
   price: 'ascendent',
-  pagination: {
-    skip: 0,
-    limit: 0,
-    items: 10,
-  },
   toggleOrder: () => {
     if (filters.value.price === 'ascendent') {
       filters.value.price = 'decrescent'
@@ -68,7 +65,17 @@ const filteredProducts = computed(() => {
 
   return result
 })
-console.log(filters.value.search)
+
+const {
+  pagination,
+  totalPages,
+  paginatedItems,
+  nextPage,
+  prevPage,
+  goToPage
+} = usePagination(filteredProducts)
+
+
 </script>
 <template>
   <div>
@@ -101,7 +108,7 @@ console.log(filters.value.search)
       <div class="filter-wrapper">
         <label>Items per page:</label>
         <span class="filter">
-          <select id="items-select" v-model="filters.pagination.items" class="cursor-pointer focus:outline-none" name="items-select">
+          <select id="items-select" v-model="pagination.itemsPerPage" class="cursor-pointer focus:outline-none" name="items-select">
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="20">20</option>
@@ -113,23 +120,23 @@ console.log(filters.value.search)
     </nav>
     <section class="items-container">
       <ProductCard
-        v-for="product in filteredProducts"
+        v-for="product in paginatedItems"
         :key="product.id"
         :product="product"
       />
     </section>
     <div class="pagination-wrapper flex justify-end gap-1 pb-18">
       <button class="flex">
-        <IconChevronsLeft />
+        <IconChevronsLeft @click="goToPage(1)" />
       </button>
       <button>
-        <IconChevronLeft />
+        <IconChevronLeft @click="prevPage" />
       </button>
       <button>
-        <IconChevronRight />
+        <IconChevronRight @click="nextPage" />
       </button>
       <button class="flex">
-        <IconChevronsRight  />
+        <IconChevronsRight @click="goToPage(totalPages)"  />
       </button>
     </div>
   </div>
