@@ -5,7 +5,7 @@
         Gaming<span class="text-blue-400">HUB</span>
       </p>
       <p class="text-xs md:text-sm text-gray-400">
-        © 2025 GamingHUB. Todos los derechos reservados.
+        © 2025 GamingHUB. All rights reserved.
       </p>
     </div>
   </footer>

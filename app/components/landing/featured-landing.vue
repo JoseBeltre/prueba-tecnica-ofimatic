@@ -6,9 +6,9 @@ import laptopImg from '~/assets/imgs/landing/laptop.png'
 <template>
   <section id="destacados" class="px-4 md:px-6 py-12 md:py-16 max-w-6xl mx-auto">
       <h2 class="section-title">
-        PRODUCTOS DESTACADOS
+        FEATURED PRODUCTS
       </h2>
-      <p class="section-subtitle">Lo mejor de nuestra selección, solo para ti.</p>
+      <p class="section-subtitle">The best of our selection, just for you.</p>
 
       <!-- Desktop Layout -->
       <div class="hidden md:flex relative h-120">
@@ -37,8 +37,8 @@ import laptopImg from '~/assets/imgs/landing/laptop.png'
             <img class="max-h-full max-w-full object-contain" :src="iphoneImg" alt="">
           </div>
           <div class="text-center mt-4">
-            <h3 class="font-bold text-lg text-gray-800">iPhone Premium</h3>
-            <p class="text-sm text-gray-600">Lo último en tecnología móvil</p>
+            <h3 class="font-bold text-lg text-gray-800">iPhone 17</h3>
+            <p class="text-sm text-gray-600">The latest in mobile technology</p>
           </div>
         </NuxtLink>
         <NuxtLink
@@ -49,7 +49,7 @@ import laptopImg from '~/assets/imgs/landing/laptop.png'
           </div>
           <div class="text-center mt-4">
             <h3 class="font-bold text-lg text-gray-800">PC Gaming</h3>
-            <p class="text-sm text-gray-600">Potencia extrema para jugar</p>
+            <p class="text-sm text-gray-600">Extreme power for gaming</p>
           </div>
         </NuxtLink>
         <NuxtLink
@@ -59,8 +59,8 @@ import laptopImg from '~/assets/imgs/landing/laptop.png'
             <img class="max-h-full max-w-full object-contain" :src="laptopImg" alt="">
           </div>
           <div class="text-center mt-4">
-            <h3 class="font-bold text-lg text-gray-800">Laptop Pro</h3>
-            <p class="text-sm text-gray-600">Rendimiento portátil profesional</p>
+            <h3 class="font-bold text-lg text-gray-800">High-End Laptops</h3>
+            <p class="text-sm text-gray-600">Professional portable performance</p>
           </div>
         </NuxtLink>
       </div>

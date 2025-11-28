@@ -5,15 +5,15 @@
       Gaming<span class="text-blue-500">HUB</span>
     </NuxtLink>
     <nav class="flex gap-2 md:gap-8 text-xs md:text-sm items-center text-nowrap">
-      <a href="#inicio" class="hidden md:inline">Inicio</a>
-      <a href="#destacados" class="hidden md:inline">Destacados</a>
-      <a href="#categorias" class="hidden md:inline">Categorias</a>
-      <a href="#contacto" class="hidden md:inline">Contacto</a>
+      <a href="#inicio" class="hidden md:inline">Home</a>
+      <a href="#destacados" class="hidden md:inline">Featured</a>
+      <a href="#categorias" class="hidden md:inline">Categories</a>
+      <a href="#contacto" class="hidden md:inline">Contact</a>
       <NuxtLink
         class="bg-black p-2 text-white rounded-full px-4 md:px-6 cursor-pointer outline-4 hover:outline-black/40 text-xs md:text-sm"
         to="/login"
       >
-        Iniciar sesión
+        Join us
       </NuxtLink>
     </nav>
   </header>

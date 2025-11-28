@@ -6,10 +6,10 @@ import { IconLocation } from '@tabler/icons-vue';
     <div class="max-w-4xl mx-auto">
       <div class="text-center mb-8 md:mb-12">
         <h2 class="section-title">
-          ¿TIENES ALGUNA PREGUNTA?
+          ¿HAVE ANY QUESTION?
         </h2>
         <p class="section-subtitle">
-          Estamos aquí para ayudarte. Envíanos un mensaje y te responderemos pronto.
+          We're here to help. Send us a message and we'll get back to you soon.
         </p>
       </div>
 
@@ -17,18 +17,18 @@ import { IconLocation } from '@tabler/icons-vue';
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-4 md:mb-6">
           <div>
             <label for="name" class="block text-sm font-bold text-gray-700 mb-2">
-              Nombre completo
+              Full Name
             </label>
-            <input id="name" type="text" placeholder="Tu nombre"
+            <input id="name" type="text" placeholder="Your name"
               class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-400 focus:outline-none transition text-sm md:text-base"
               required>
           </div>
 
           <div>
             <label for="email" class="block text-sm font-bold text-gray-700 mb-2">
-              Correo electrónico
+              E-mail
             </label>
-            <input id="email" type="email" placeholder="tu@email.com"
+            <input id="email" type="email" placeholder="you@email.com"
               class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-400 focus:outline-none transition text-sm md:text-base"
               required>
           </div>
@@ -36,7 +36,7 @@ import { IconLocation } from '@tabler/icons-vue';
 
         <div class="mb-4 md:mb-6">
           <label for="phone" class="block text-sm font-bold text-gray-700 mb-2">
-            Teléfono (opcional)
+            Phone (optional)
           </label>
           <input id="phone" type="tel" placeholder="+1 (123) 456-7890"
             class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-400 focus:outline-none transition text-sm md:text-base">
@@ -44,25 +44,25 @@ import { IconLocation } from '@tabler/icons-vue';
 
         <div class="mb-4 md:mb-6">
           <label for="subject" class="block text-sm font-bold text-gray-700 mb-2">
-            Asunto
+            Subject
           </label>
           <select id="subject"
             class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-400 focus:outline-none transition text-sm md:text-base bg-white"
             required>
-            <option value="">Selecciona un asunto</option>
-            <option value="soporte">Cotizacion</option>
-            <option value="ventas">Consulta de ventas</option>
-            <option value="garantia">Garantía y devoluciones</option>
-            <option value="envio">Información de envío</option>
-            <option value="otro">Otro</option>
+            <option value="">Select a subject</option>
+            <option value="soporte">Quotation</option>
+            <option value="ventas">Sales inquiry</option>
+            <option value="garantia">Warranty and returns</option>
+            <option value="envio">Shipping information</option>
+            <option value="otro">Other</option>
           </select>
         </div>
 
         <div class="mb-6 md:mb-8">
           <label for="message" class="block text-sm font-bold text-gray-700 mb-2">
-            Mensaje
+            Message
           </label>
-          <textarea id="message" rows="5" placeholder="Escribe tu mensaje aquí..."
+          <textarea id="message" rows="5" placeholder="Write your message here..."
             class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-400 focus:outline-none transition resize-none text-sm md:text-base"
             required />
         </div>
@@ -70,11 +70,10 @@ import { IconLocation } from '@tabler/icons-vue';
         <div class="text-center w-full flex">
           <button type="submit"
             class="w-full px-8 md:px-12 py-3 md:py-4 bg-blue-600 text-white font-bold rounded-xl shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all transform hover:scale-105 text-sm md:text-base flex justify-center items-center gap-2 cursor-pointer">
-            Enviar mensaje
+            Send message
             <IconLocation size="20" />
           </button>
         </div>
-
       </form>
     </div>
   </section>
