@@ -1,5 +1,4 @@
 <script setup>
-import { IconChevronLeft, IconChevronRight, IconChevronsLeft, IconChevronsRight } from '@tabler/icons-vue';
 import { useProducts } from '@/composables/useProducts';
 import { usePagination } from '@/composables/usePagination';
 import SearchInput from '~/components/search-input.vue';
@@ -105,18 +104,7 @@ const {
         <label>Price:</label>
         <button class="filter" @click="filters.toggleOrder">{{ filters.price }}</button>
       </div>
-      <div class="filter-wrapper">
-        <label>Items per page:</label>
-        <span class="filter">
-          <select id="items-select" v-model="pagination.itemsPerPage" class="cursor-pointer focus:outline-none" name="items-select">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="35">35</option>
-            <option value="50">50</option>
-          </select>
-        </span>
-      </div>
+      <ItemsPerPageFilter v-model="pagination.itemsPerPage" />
     </nav>
     <section class="items-container">
       <ProductCard
@@ -125,19 +113,12 @@ const {
         :product="product"
       />
     </section>
-    <div class="pagination-wrapper flex justify-end gap-1 pb-18">
-      <button class="flex">
-        <IconChevronsLeft @click="goToPage(1)" />
-      </button>
-      <button>
-        <IconChevronLeft @click="prevPage" />
-      </button>
-      <button>
-        <IconChevronRight @click="nextPage" />
-      </button>
-      <button class="flex">
-        <IconChevronsRight @click="goToPage(totalPages)"  />
-      </button>
-    </div>
+    <PaginationButtons
+      :go-to-page="goToPage"
+      :next-page="nextPage"
+      :prev-page="prevPage"
+      :total-pages="totalPages"
+      :pagination="pagination"
+    />
   </div>
 </template>
