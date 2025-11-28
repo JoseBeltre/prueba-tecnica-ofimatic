@@ -10,6 +10,14 @@ import Footer from '~/components/landing/footer-landing.vue';
 definePageMeta({
   layout: false
 })
+
+useHead({
+  title: 'GamingHUB - The technology you need at the best price',
+  description: 'Discover the best smartphones, laptops and gaming accessories. Free shipping, extended warranty and the most competitive prices on the market.',
+  ogTitle: 'GamingHUB - Your tech and gaming store',
+  ogDescription: 'Find smartphones, laptops and all the gaming accessories you need. Amazing deals await you!',
+})
+
 </script>
 
 <template>

@@ -8,6 +8,14 @@ definePageMeta({
   middleware: ['auth']
 })
 
+useHead({
+  title: `${product?.title || 'Product'} - GamingHUB`,
+  description: product?.description || 'Buy this amazing product at GamingHUB. Free shipping, extended warranty and the best guaranteed price.',
+  ogTitle: `${product?.title || 'Product'} - GamingHUB`,
+  ogDescription: product?.description || 'Discover this product at GamingHUB',
+  ogType: 'product'
+})
+
 const route = useRoute()
 const id = route.params.id
 

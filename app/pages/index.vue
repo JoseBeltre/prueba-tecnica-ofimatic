@@ -10,6 +10,13 @@ import PencilImg from '@/assets/imgs/dashboard/pencil.png'
 definePageMeta({
   middleware: ['auth']
 })
+
+useHead({
+  title: 'GamingHUB - The technology you need at the best price',
+  description: 'Discover the best smartphones, laptops and gaming accessories. Free shipping, extended warranty and the most competitive prices on the market.',
+  ogTitle: 'GamingHUB - Your tech and gaming store',
+  ogDescription: 'Find smartphones, laptops and all the gaming accessories you need. Amazing deals await you!',
+})
 const user = useUserStore().user
 
 const { total } = useProducts()

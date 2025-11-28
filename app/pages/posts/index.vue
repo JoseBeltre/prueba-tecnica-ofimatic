@@ -10,6 +10,13 @@ definePageMeta({
   middleware: ['auth']
 })
 
+useHead({
+  title: 'Blog - GamingHUB | Technology news and guides',
+  description: 'Read the latest news, reviews and guides about technology and gaming. Stay updated with tech world trends.',
+  ogTitle: 'GamingHUB Blog - Tech news and guides',
+  ogDescription: 'Articles, reviews and guides about technology and gaming.',
+})
+
 const { posts, featuredPost, searchPosts } = usePosts()
 const { users } = useUsers()
 
@@ -81,7 +88,7 @@ const {
         </template>
 
         <p v-else class="text-center text-gray-500 py-8 col-span-2">
-          No se han encontrado resultados...
+          No results available..
         </p>
       </section>
     </ClientOnly>

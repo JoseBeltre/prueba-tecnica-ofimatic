@@ -6,6 +6,14 @@ definePageMeta({
   middleware: ['auth']
 })
 
+useHead({
+  title: `${post?.title || 'Article'} - GamingHUB Blog`,
+  description: post?.body?.slice(0, 160) || 'Read this interesting article on GamingHUB blog about technology and gaming.',
+  ogTitle: `${post?.title || 'Article'} - GamingHUB Blog`,
+  ogDescription: post?.body?.slice(0, 200) || 'Article from GamingHUB blog',
+  ogType: 'article'
+})
+
 const route = useRoute()
 const id = route.params.id
 

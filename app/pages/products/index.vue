@@ -8,6 +8,13 @@ definePageMeta({
   middleware: ['auth']
 })
 
+useHead({
+  title: 'Products - GamingHUB | Complete technology catalog',
+  description: 'Explore our complete catalog of tech and gaming products. Smartphones, laptops, tablets and more. Filter by category and find what you are looking for.',
+  ogTitle: 'Product Catalog - GamingHUB',
+  ogDescription: 'Discover our complete catalog with the best technology and gaming products.',
+})
+
 const user = useUserStore().user
 const { pending, products, topRated, getCategories, searchProducts, getProductsByCategory } = useProducts()
 
@@ -94,10 +101,10 @@ const {
       <h2 class="font-black text-4xl md:text-5xl lg:text-6xl uppercase">The Favorite of Many</h2>
       <p class="leading-4 mb-2 md:mb-4">
         <span class="font-bold">{{ topRated.title }}</span> 
-        <span class="hidden sm:inline">es el mejor valorado de nuestro catalogo</span>
+        <span class="hidden sm:inline"> is most rated by our clients. Give it a Try.</span>
       </p>
       <NuxtLink :to="`/products/${topRated.id}`" class="hero-btn">
-        Echale un vistazo
+        See Product
       </NuxtLink>
     </HeroSection>
     
@@ -141,7 +148,7 @@ const {
         />
       </template>
       <p v-else class="text-center text-gray-500 py-8">
-        No se han encontrado resultados...
+        No results available..
       </p>
     </section>
     
