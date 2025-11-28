@@ -37,10 +37,10 @@ const handleLogin = async () => {
 
 </script>
 <template>
-  <form class="font-poppins text-center relative" @submit.prevent="handleLogin">
+  <form class="font-poppins text-center relative max-w-[500px]" @submit.prevent="handleLogin">
     <img class="absolute size-26 -top-34 right-3" src="/skateboarding.svg" >
     <h1 class="font-extrabold text-3xl mb-2">Log In</h1>
-    <p class="leading-5 max-sm:leading-4 max-sm:text-sm">Enter your credentials to start to keep discovering amazing products!!</p>
+    <p class="leading-5 max-sm:leading-4 max-sm:text-sm text-pretty">Welcome back! Provide your credentials and let’s get started</p>
     <div class="mt-6 grid gap-5 px-1">
       <div class="relative">
         <input id="username" v-model="formData.username"  class="floating-input peer" placeholder=" "  name="username" type="text" required>
