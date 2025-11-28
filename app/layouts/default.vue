@@ -6,7 +6,7 @@
 </script>
 <template>
   <div class="min-h-dvh bg-linear-to-br from-[#D0DDFF] to-[#8EADFC] sm:p-6 sm:pb-0 pb-0">
-    <div class="bg-white max-w-[1360px] m-auto min-h-dvh sm:px-6 sm:rounded-t-2xl">
+    <div class="bg-white max-w-[1360px] m-auto min-h-[calc(100dvh-24px)] sm:px-6 sm:rounded-t-2xl">
       <header class="max-sm:bg-[#618dff] max-sm:px-4 max-sm:text-white flex items-center justify-between py-4 max-sm:flex-row-reverse">
         <div class="flex gap-14 md:gap-20 items-center">
           <a class="hidden sm:block font-black text-3xl" href="/">
