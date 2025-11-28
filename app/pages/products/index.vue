@@ -7,10 +7,68 @@ definePageMeta({
   title: 'Products - Ofimatic',
   middleware: ['auth']
 })
-const user = useUserStore().user
-const { products, topRated, getCategories } = useProducts()
-const categories = await getCategories()
 
+const user = useUserStore().user
+const { products, topRated, getCategories, searchProducts, getProductsByCategory } = useProducts()
+const categories = await getCategories()
+const filters = ref({
+  search: '',
+  category: 'all',
+  price: 'ascendent',
+  pagination: {
+    skip: 0,
+    limit: 0,
+    items: 10,
+  },
+  toggleOrder: () => {
+    if (filters.value.price === 'ascendent') {
+      filters.value.price = 'decrescent'
+    } else {
+      filters.value.price = 'ascendent'
+    }
+  }
+})
+const searchResult = ref(null)
+const categoryResult = ref(null)
+
+// WATCH PARA FILTRAR PRODUCTOS CON SEARCH
+watch(() => filters.value.search, async (value) => {
+  if(!value){
+    searchResult.value = null
+    return
+  }
+
+  const res = await searchProducts(value)
+  searchResult.value = res.products
+})
+
+// WATCH PARA FILTRAR PRODUCTOS POR CATEGORIA SELECCIONADA
+watch(() => filters.value.category, async (category) => {
+  if(category === 'all') {
+    categoryResult.value = null
+    return
+  }
+
+  const res = await getProductsByCategory(category)
+  categoryResult.value = res.data.value.products
+})
+
+const filteredProducts = computed(() => {
+  let result = categoryResult.value ? [...categoryResult.value] :[...products.value]
+
+  if (searchResult.value) {
+    result = searchResult.value
+  }
+
+  if (filters.value.price === 'ascendent'){
+    result = result.sort((a, b) => a.price - b.price)
+  } else {
+    result = result.sort((a, b) => b.price - a.price)
+  }
+
+  return result
+})
+console.log(filters.value.search)
 </script>
 <template>
   <div>
@@ -26,23 +84,24 @@ const categories = await getCategories()
         </NuxtLink>
     </HeroSection>
     <nav class="flex gap-x-6 gap-y-2 items-center flex-wrap mb-3">
-      <SearchInput />
+      <SearchInput v-model="filters.search" class="border-black!" />
       <div class="filter-wrapper">
         <label>Category: </label>
         <span class="filter">
-          <select id="category-select" class="cursor-pointer focus:outline-none capitalize" name="category-select">
-            <option v-for="category in categories" :key="category" value="category">{{ category }}</option>
+          <select id="category-select" v-model="filters.category" class="cursor-pointer focus:outline-none capitalize" name="category-select">
+            <option value="all">All</option>
+            <option v-for="category in categories" :key="category" :value="category">{{ category }}</option>
           </select>
         </span>
       </div>
       <div class="filter-wrapper">
         <label>Price:</label>
-        <button class="filter">Ascendent</button>
+        <button class="filter" @click="filters.toggleOrder">{{ filters.price }}</button>
       </div>
       <div class="filter-wrapper">
         <label>Items per page:</label>
         <span class="filter">
-          <select id="items-select" class="cursor-pointer focus:outline-none" name="items-select">
+          <select id="items-select" v-model="filters.pagination.items" class="cursor-pointer focus:outline-none" name="items-select">
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="20">20</option>
@@ -54,7 +113,7 @@ const categories = await getCategories()
     </nav>
     <section class="items-container">
       <ProductCard
-        v-for="product in products"
+        v-for="product in filteredProducts"
         :key="product.id"
         :product="product"
       />

@@ -7,14 +7,34 @@ definePageMeta({
   middleware: ['auth']
 })
 
-const { posts, featuredPost } = usePosts()
-
+const { posts, featuredPost, searchPosts } = usePosts()
 const { users } = useUsers()
 const getUserPost = (userId) => {
   return users.value.find(user => user.id === userId) || null
 }
+const search = ref('')
+const searchResults = ref(null)
 
-const featureUser = ref(getUserPost(featuredPost.value.userId))
+const featureUser = await getUserPost(featuredPost.value.userId)
+
+watch(() => search.value, async (search) => {
+  if (!search) {
+    searchResults.value = null
+  }
+  
+  const res = await searchPosts(search)
+  searchResults.value = res.posts
+})
+
+const filteredPosts = computed(() => {
+  let result = [...posts.value]
+
+  if(searchResults.value){
+    result = searchResults.value
+  }
+
+  return result
+})
 
 </script>
 
@@ -37,10 +57,14 @@ const featureUser = ref(getUserPost(featuredPost.value.userId))
     </div>
 
     <nav class="flex gap-x-6 gap-y-2 items-center flex-wrap mt-8 mb-3">
-      <SearchInput />
+      <SearchInput v-model="search" />
     </nav>
     <section class="grid gap-4 grid-cols-1 sm:grid-cols-2 mb-3">
-      <ArticleCard v-for="post in posts" :key="post.id" :post="post" :user="getUserPost(post.userId)" />
+      <ArticleCard
+        v-for="post in filteredPosts"
+        :key="post.id"
+        :post="post"
+        :user="getUserPost(post.userId)" />
     </section>
   </div>
 </template>

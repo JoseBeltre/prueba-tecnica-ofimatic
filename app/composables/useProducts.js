@@ -20,6 +20,14 @@ export function useProducts() {
     return await $fetch('https://dummyjson.com/products/category-list')
   }
 
+  const getProductsByCategory = async (category) => {
+    return await useFetch(`https://dummyjson.com/products/category/${category}`)
+  }
+
+  const searchProducts = async (query) => {
+    return await $fetch(`https://dummyjson.com/products/search?q=${query}`)
+  }
+
   return { 
     pending,
     products,
@@ -27,6 +35,8 @@ export function useProducts() {
     topRated,
     error,
     getById,
-    getCategories 
+    getCategories,
+    getProductsByCategory,
+    searchProducts
   }
 }

@@ -17,6 +17,10 @@ export function usePosts () {
     return await useFetch(`https://dummyjson.com/posts/${id}/comments`)
   }
 
+  const searchPosts = async (query) => {
+    return await $fetch(`https://dummyjson.com/posts/search?q=${query}`)
+  }
+
   return { 
     posts,
     pending,
@@ -24,6 +28,7 @@ export function usePosts () {
     total,
     featuredPost,
     getById,
-    getComments
+    getComments,
+    searchPosts
   }
 }
