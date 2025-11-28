@@ -1,11 +1,14 @@
 export function useProducts() {
   const { data, pending, error } = useFetch('https://dummyjson.com/products?limit=0')
   
-  const products = computed(() => data.value?.products)
+  const products = computed(() => data.value?.products ?? [])
 
   const total = computed(() => data.value?.total)
 
   const topRated = computed(() => {
+    if (!products.value.length) {
+      return { id: null, title: '', rating: 0 }
+    }
     return [...products.value].sort((a, b) => b.rating - a.rating)[0]
   })
 
