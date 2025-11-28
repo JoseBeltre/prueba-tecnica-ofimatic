@@ -5,7 +5,7 @@ const props = defineProps({
     required: true
   },
   user: {
-    type: Object,
+    type: null,
     required: true
   },
 })

@@ -8,10 +8,14 @@ definePageMeta({
   middleware: ['auth']
 })
 
-
 const user = useUserStore().user
-const { products, topRated, getCategories, searchProducts, getProductsByCategory } = useProducts()
-const categories = await getCategories()
+const { pending, products, topRated, getCategories, searchProducts, getProductsByCategory } = useProducts()
+
+const categories = ref([])
+onMounted(async () => {
+  categories.value = await getCategories()
+})
+
 const filters = ref({
   search: '',
   category: 'all',
@@ -24,11 +28,11 @@ const filters = ref({
     }
   }
 })
+
 const searchResult = ref(null)
 const categoryResult = ref(null)
 
-// WATCH PARA FILTRAR PRODUCTOS CON SEARCH
-watch(() => filters.value.search, async (value) => {
+const stopSearchWatch = watch(() => filters.value.search, async (value) => {
   if(!value){
     searchResult.value = null
     return
@@ -38,8 +42,7 @@ watch(() => filters.value.search, async (value) => {
   searchResult.value = res.products
 })
 
-// WATCH PARA FILTRAR PRODUCTOS POR CATEGORIA SELECCIONADA
-watch(() => filters.value.category, async (category) => {
+const stopCategoryWatch = watch(() => filters.value.category, async (category) => {
   if(category === 'all') {
     categoryResult.value = null
     return
@@ -49,8 +52,13 @@ watch(() => filters.value.category, async (category) => {
   categoryResult.value = res.data.value.products
 })
 
+onBeforeUnmount(() => {
+  stopSearchWatch()
+  stopCategoryWatch()
+})
+
 const filteredProducts = computed(() => {
-  let result = categoryResult.value ? [...categoryResult.value] :[...products.value]
+  let result = categoryResult.value ? [...categoryResult.value] : [...products.value]
 
   if (searchResult.value) {
     result = searchResult.value
@@ -73,30 +81,44 @@ const {
   prevPage,
   goToPage
 } = usePagination(filteredProducts)
-
-
 </script>
+
 <template>
   <div>
     <HeroSection
+      v-if="topRated && topRated.title"
       img-url="https://i.blogs.es/2b106e/amazonechoplusap/1366_2000.jpg"
       :img-alt="topRated.title"
       :title="`Let's find something cool, ${user.firstName}`"
     >
       <h2 class="font-black text-4xl md:text-5xl lg:text-6xl uppercase">The Favorite of Many</h2>
-        <p class="leading-4 mb-2 md:mb-4"><span class="font-bold">{{ topRated.title }}</span> <span class="hidden sm:inline">es el mejor valorado de nuestro catalogo</span></p>
-        <NuxtLink :to="`/products/${topRated.id}`" class="hero-btn">
-          Echale un vistazo
-        </NuxtLink>
+      <p class="leading-4 mb-2 md:mb-4">
+        <span class="font-bold">{{ topRated.title }}</span> 
+        <span class="hidden sm:inline">es el mejor valorado de nuestro catalogo</span>
+      </p>
+      <NuxtLink :to="`/products/${topRated.id}`" class="hero-btn">
+        Echale un vistazo
+      </NuxtLink>
     </HeroSection>
+    
+    <!-- Skeleton para el hero mientras carga -->
+    <div v-else class="bg-gray-200 animate-pulse rounded-2xl h-64 mb-4" />
+    
     <nav class="flex gap-x-6 gap-y-2 items-center flex-wrap mb-3">
       <SearchInput v-model="filters.search" class="border-black!" />
       <div class="filter-wrapper">
         <label>Category: </label>
         <span class="filter">
-          <select id="category-select" v-model="filters.category" class="cursor-pointer focus:outline-none capitalize" name="category-select">
+          <select 
+            id="category-select" 
+            v-model="filters.category" 
+            class="cursor-pointer focus:outline-none capitalize" 
+            name="category-select"
+          >
             <option value="all">All</option>
-            <option v-for="category in categories" :key="category" :value="category">{{ category }}</option>
+            <option v-for="category in categories" :key="category" :value="category">
+              {{ category }}
+            </option>
           </select>
         </span>
       </div>
@@ -106,14 +128,25 @@ const {
       </div>
       <ItemsPerPageFilter v-model="pagination.itemsPerPage" />
     </nav>
+    
     <section class="items-container">
-      <ProductCard
-        v-for="product in paginatedItems"
-        :key="product.id"
-        :product="product"
-      />
+      <template v-if="pending">
+        <SkeletonProductCard v-for="n in 6" :key="n" />
+      </template>
+      <template v-else-if="paginatedItems && paginatedItems.length > 0">
+        <ProductCard
+          v-for="product in paginatedItems"
+          :key="product.id"
+          :product="product"
+        />
+      </template>
+      <p v-else class="text-center text-gray-500 py-8">
+        No se han encontrado resultados...
+      </p>
     </section>
+    
     <PaginationButtons
+      v-if="paginatedItems && paginatedItems.length > 0"
       :go-to-page="goToPage"
       :next-page="nextPage"
       :prev-page="prevPage"

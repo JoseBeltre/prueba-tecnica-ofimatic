@@ -14,11 +14,11 @@
           </NuxtLink>
 
         <input id="menu-opener" v-model="showMenu" class="peer hidden pointer-events-none" type="checkbox">
-        <ul class="max-sm:absolute hidden peer-checked:flex sm:flex max-sm:flex-col max-sm:bg-white max-sm:shadow-2xl max-sm:border-2 max-sm:border-black/20 max-sm:top-16 max-sm:right-4 max-sm:p-4 max-sm:rounded-xl :gap-2 sm:gap-10">
+        <ul class="max-sm:absolute hidden peer-checked:flex sm:flex max-sm:flex-col max-sm:bg-white max-sm:shadow-2xl max-sm:border-2 max-sm:border-black/20 max-sm:top-12 max-sm:right-4 max-sm:p-4 max-sm:rounded-xl :gap-2 sm:gap-10 z-10 text-black">
           <li><NuxtLink class="hover:underline hover:text-[#3970ff] transition-colors " to="/products">Productos</NuxtLink></li>
           <li><NuxtLink class="hover:underline hover:text-[#3970ff] transition-colors " to="/posts">Blog</NuxtLink></li>
         </ul>
-        <label class="sm:hidden" for="menu-opener">
+        <label class="sm:hidden cursor-pointer" for="menu-opener">
           <IconMenu v-if="!showMenu" />
           <IconX v-else />
         </label>
