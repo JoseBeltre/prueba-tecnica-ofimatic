@@ -9,11 +9,11 @@
     <div class="bg-white max-w-[1360px] m-auto min-h-[calc(100dvh-24px)] sm:px-6 sm:rounded-t-2xl">
       <header class="max-sm:bg-[#618dff] max-sm:px-4 max-sm:text-white flex items-center justify-between py-4 max-sm:flex-row-reverse">
         <div class="flex gap-14 md:gap-20 items-center">
-          <a class="hidden sm:block font-black text-3xl" href="/">
-          Logo
-        </a>
+          <NuxtLink class="hidden sm:block font-black text-3xl" href="/">
+            Logo
+          </NuxtLink>
 
-        <input id="menu-opener" v-model="showMenu" class="peer hidden" type="checkbox">
+        <input id="menu-opener" v-model="showMenu" class="peer hidden pointer-events-none" type="checkbox">
         <ul class="max-sm:absolute hidden peer-checked:flex sm:flex max-sm:flex-col max-sm:bg-white max-sm:shadow-2xl max-sm:border-2 max-sm:border-black/20 max-sm:top-16 max-sm:right-4 max-sm:p-4 max-sm:rounded-xl :gap-2 sm:gap-10">
           <li><NuxtLink class="hover:underline hover:text-[#3970ff] transition-colors " to="/products">Productos</NuxtLink></li>
           <li><NuxtLink class="hover:underline hover:text-[#3970ff] transition-colors " to="/posts">Blog</NuxtLink></li>

@@ -2,6 +2,11 @@
 import ArticleCard from '~/components/article-card.vue';
 import SearchInput from '~/components/search-input.vue';
 
+definePageMeta({
+  title: 'Posts - Ofimatic',
+  middleware: ['auth']
+})
+
 const { posts, featuredPost } = usePosts()
 
 const { users } = useUsers()

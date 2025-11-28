@@ -1,7 +1,12 @@
-<script setup lang="ts">
+<script setup>
 import { IconMinus, IconPlus, IconStarFilled } from '@tabler/icons-vue';
 import AddToCartButton from '~/components/add-to-cart-button.vue';
 import GoBackButton from '~/components/go-back-button.vue';
+
+definePageMeta({
+  title: 'Products - Ofimatic',
+  middleware: ['auth']
+})
 
 const route = useRoute()
 const id = route.params.id
