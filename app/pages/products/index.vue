@@ -1,6 +1,7 @@
 <script setup>
-import { IconChevronLeft, IconChevronRight, IconChevronsLeft, IconChevronsRight, IconSearch } from '@tabler/icons-vue';
+import { IconChevronLeft, IconChevronRight, IconChevronsLeft, IconChevronsRight } from '@tabler/icons-vue';
 import { useProducts } from '@/composables/useProducts';
+import SearchInput from '~/components/search-input.vue';
 
 definePageMeta({
   title: 'Products - Ofimatic',
@@ -13,25 +14,19 @@ const categories = await getCategories()
 </script>
 <template>
   <div>
-    <h1 class="text-2xl sm:text-4xl font-sans mb-3">Let's find something cool, {{ user.firstName + '' }}</h1>
-    <div class="bg-gray-100 aspect-square md:aspect-16/7 rounded-xl overflow-hidden relative mb-4 md:mb-8">
-      <img class="size-full object-cover -z-10" src="https://i.blogs.es/2b106e/amazonechoplusap/1366_2000.jpg" :alt="`Photo of ${topRated.title}`">
-      <div class="text-white z-40 absolute left-0 bottom-0 p-4 md:p-8 flex flex-col">
-        <h2 class="font-black text-4xl md:text-5xl lg:text-6xl uppercase">The Favorite of Many</h2>
+    <HeroSection
+      img-url="https://i.blogs.es/2b106e/amazonechoplusap/1366_2000.jpg"
+      :img-alt="topRated.title"
+      :title="`Let's find something cool, ${user.firstName}`"
+    >
+      <h2 class="font-black text-4xl md:text-5xl lg:text-6xl uppercase">The Favorite of Many</h2>
         <p class="leading-4 mb-2 md:mb-4"><span class="font-bold">{{ topRated.title }}</span> <span class="hidden sm:inline">es el mejor valorado de nuestro catalogo</span></p>
-        <NuxtLink :to="`/products/${topRated.id}`" class="border-2 border-white p-2 rounded-lg w-fit px-6 cursor-pointer hover:bg-white hover:text-black transition-all max-sm:text-sm">
+        <NuxtLink :to="`/products/${topRated.id}`" class="hero-btn">
           Echale un vistazo
         </NuxtLink>
-      </div>
-      <div class="absolute inset-0 bg-linear-to-tr from-[#000000]/80 to-transparent z-20" />
-    </div>
+    </HeroSection>
     <nav class="flex gap-x-6 gap-y-2 items-center flex-wrap mb-3">
-      <div class="rounded-full border-2 flex items-center  p-2 px-4 flex-1">
-        <input id="search" class="lg:w-64 flex-1 focus:outline-0" type="search" name="search" placeholder="Nike Air Pro...">
-        <label for="search" type="search" >
-          <IconSearch />
-        </label>
-      </div>
+      <SearchInput />
       <div class="filter-wrapper">
         <label>Category: </label>
         <span class="filter">
@@ -57,7 +52,7 @@ const categories = await getCategories()
         </span>
       </div>
     </nav>
-    <section class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-3">
+    <section class="items-container">
       <ProductCard
         v-for="product in products"
         :key="product.id"

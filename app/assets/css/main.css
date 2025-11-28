@@ -32,6 +32,14 @@
     @apply p-1 rounded-xl border cursor-pointer;
   }
 
+  .hero-btn {
+    @apply border-2 border-white p-2 rounded-lg w-fit px-6 cursor-pointer hover:bg-white hover:text-black transition-all max-sm:text-sm;
+  }
+
+  .items-container {
+    @apply grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-3;
+  }
+
   body {
     @apply font-poppins;
   }

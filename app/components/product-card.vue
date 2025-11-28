@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { IconHeart, IconHeartFilled, IconStarFilled } from '@tabler/icons-vue';
 
 const props = defineProps({

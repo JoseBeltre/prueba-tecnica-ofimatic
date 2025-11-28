@@ -14,13 +14,9 @@ const user = useUserStore().user
 
 const { total } = useProducts()
 
-const { getAll: getAllPosts } = usePosts()
-const { data: postsData } = await getAllPosts()
-const totalPosts = computed(() => postsData.value?.total || 0)
+const { total: totalPosts } = usePosts()
 
-const { getAll: getAllUsers } = useUsers()
-const { data: usersData } = await getAllUsers()
-const totalUsers = computed(() => usersData.value?.total || 0)
+const { total: totalUsers } = useUsers()
 
 </script>
 <template>
